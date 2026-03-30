@@ -1,0 +1,71 @@
+PSEUDOCODIGO Aurora_Siger_FIAP_V1
+
+temp_int, temp_ext, pressao, energia, energia_bruta, autonomia: REAL
+
+integridade, modulos, chance_sucesso, i: INTEIRO
+
+df_analises: DATASET
+
+decolagem_ok: LOGICO
+
+// 1. CONFIGURAÇÃO DE PARÂMETROS E CONSTANTES (ITEM 1.1)
+CAPACIDADE_TOTAL <- 50.0  // kWh
+CONSUMO_ESTIMADO <- 15.0  // kWh
+EFICIENCIA       <- 0.95  // 95%
+LIMITE_ENERGIA   <- 80.0  // %
+
+// 2. FUNÇÃO DE SIMULAÇÃO 
+SIMULA_DADOS simular_telemetria()
+    chance_sucesso <- Numero_Aleatorio(1, 100)
+    
+    SE (chance_sucesso <= 78) ENTÃO
+        // Geração de Dados (Sucesso)
+        RETORNE Gerar_Dados(temp_int: 21.0 a 25.0, energia: 80.0 a 100.0, pressao: 200.0 a 300.0, integridade: 1, modulos: 1)
+    SENÃO
+        // Geração de Anomalias (Falha)
+        RETORNE Gerar_Dados(temp_int: 26.0 a 45.0, energia: 0.0 a 79.0, pressao: 0.0 a 199.0, integridade: 0, modulos: 0)
+    FIM_SE
+FIM_SIMULA_DADOS
+
+// 3. PROCESSAMENTO DO DATASET (ITEM 1.3 e 1.4)
+PARA i DE 1 A 100 FACA
+    d <- simular_telemetria()
+    
+    // Cálculos de Engenharia Elétrica
+    energia_bruta <- CAPACIDADE_TOTAL * (d.energia / 100)
+    autonomia     <- (energia_bruta * EFICIENCIA) - CONSUMO_ESTIMADO
+    
+    // Algoritmo de Verificação (Lógica Go/No-Go)
+    decolagem_ok <- VERDADEIRO
+    SE (d.temp_int < 21 OU d.temp_int > 25) ENTÃO decolagem_ok <- FALSO
+    SE (d.energia < LIMITE_ENERGIA) ENTÃO decolagem_ok <- FALSO
+    SE (d.pressao < 200 OU d.pressao > 300) ENTÃO decolagem_ok <- FALSO
+    SE (d.integridade == 0 OU d.modulos == 0 OU autonomia < 10) ENTÃO decolagem_ok <- FALSO
+    
+    // Armazenar no Dataset
+    Salvar_Registro_Dataset(i, d, energia_bruta, autonomia, decolagem_ok)
+FIM_PARA
+
+// 4. EXIBIÇÃO DOS RESULTADOS (RELATÓRIO FINAL)
+IMPRIMA("1. AMOSTRA DO DATASET DE ANÁLISE ENERGÉTICA")
+EXIBIR_TABELA(df_analises.PRIMEIRAS_10_LINHAS)
+
+IMPRIMA("2. DETALHAMENTO DA TELEMETRIA (MISSÃO ATUAL)")
+missao_atual <- df_analises.LINHA(1)
+
+IMPRIMA("Temp. Interna: ", missao_atual.temp_int, " °C")
+IMPRIMA("Energia:       ", missao_atual.energia, " %")
+IMPRIMA("Pressão:       ", missao_atual.pressao, " bar")
+IMPRIMA("Energia Bruta: ", missao_atual.energia_bruta, " kWh")
+IMPRIMA("Autonomia:     ", missao_atual.autonomia, " kWh")
+IMPRIMA("---------------------------------------------")
+
+// 5. VEREDITO FINAL
+SE (missao_atual.decolagem_ok == VERDADEIRO) ENTÃO
+    IMPRIMA("STATUS FINAL: [PRONTO PARA DECOLAR]")
+SENÃO
+    IMPRIMA("STATUS FINAL: [DECOLAGEM ABORTADA - ANOMALIA]")
+FIM_SE
+
+// 6. PERSISTÊNCIA
+SALVAR_ARQUIVO("telemetria_aurora.csv", df_analises)
