@@ -3,9 +3,9 @@
 Este projeto integra engenharia de sistemas aeroespaciais com ciência de dados. O **Aurora Siger** é um software de monitoramento que simula a telemetria crítica de uma aeronave, validando parâmetros de segurança e realizando cálculos de autonomia energética em tempo real para suporte à decisão de lançamento.
 
 ## Funcionalidades Principais
-* **Análise Preditiva de Autonomia:** Cálculo de energia bruta (kWh) e autonomia residual pós-decolagem.
+* **Análise Preditiva de Autonomia:** Cálculo de energia bruta (kWh) e autonomia inicial pós decolagem.
 * **Processamento em Lote (Batch):** Simulação de 100 missões simultâneas para geração de estatísticas de confiabilidade.
-* **Persistência de Dados:** Exportação automática de um dataset completo em formato `.csv` para auditoria e histórico.
+* **Dataset** Exportação automática de um dataset completo em formato `.csv`
 
 ---
 
