@@ -57,8 +57,11 @@ python --version
 pip install pandas numpy ipykernel
 ```
 Nota: O ipykernel é necessário para que o VS Code consiga conectar o Python ao Notebook.
+
 4. **Abertura do projeto**: Abra a pasta do projeto no VS Code, clique no arquivo Aurora_Siger.ipynb e, no canto superior direito, clique em "Select Kernel" e escolha a sua instalação do Python.
+
 5. **Execução do Script**: Com as dependências instaladas, clique no botão "Run All" (Executar Tudo) no topo do arquivo.
+
 6.  **Resultados e saídas**: 
 * As tabelas (amostra do dataset) e o relatório de telemetria aparecerão logo abaixo das células de código.
 * Após a execução da última célula, o arquivo telemetria_aurora.csv será gerado/atualizado automaticamente na mesma pasta do projeto.
