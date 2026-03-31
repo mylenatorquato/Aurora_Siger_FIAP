@@ -8,7 +8,7 @@ df_analises: DATASET
 
 decolagem_ok: LOGICO
 
-// 1. CONFIGURAÇÃO DE PARÂMETROS E CONSTANTES (ITEM 1.1)
+// 1. CONFIGURAÇÃO DE PARÂMETROS E CONSTANTES 
 CAPACIDADE_TOTAL <- 50.0  // kWh
 CONSUMO_ESTIMADO <- 15.0  // kWh
 EFICIENCIA       <- 0.95  // 95%
@@ -27,7 +27,7 @@ SIMULA_DADOS simular_telemetria()
     FIM_SE
 FIM_SIMULA_DADOS
 
-// 3. PROCESSAMENTO DO DATASET (ITEM 1.3 e 1.4)
+// 3. PROCESSAMENTO DO DATASET 
 PARA i DE 1 A 100 FACA
     d <- simular_telemetria()
     

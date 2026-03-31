@@ -29,14 +29,6 @@ O software aplica as seguintes fórmulas para validar a viabilidade energética:
 
 ---
 
-##  Tecnologias e Bibliotecas
-* **Python 3.x**: Núcleo lógico e estrutural.
-* **Pandas**: Estruturação de dados em DataFrames e manipulação de arquivos CSV.
-* **NumPy**: Suporte para operações matemáticas e cálculos vetoriais.
-* **Jupyter/Python Notebook**: Ambiente de desenvolvimento e exibição de tabelas.
-
----
-
 ##  Funcionamento do Algoritmo
 
 1.  **Geração Estocástica**: O script simula 100 registros de telemetria com **78% de probabilidade de sucesso** (missões nominais) e 22% de anomalias críticas para testes de estresse.
@@ -46,18 +38,31 @@ O software aplica as seguintes fórmulas para validar a viabilidade energética:
 
 ---
 
+##  Tecnologias e Bibliotecas
+* **Python 3.x**: Núcleo lógico e estrutural.
+* **Pandas**: Estruturação de dados em DataFrames e manipulação de arquivos CSV.
+* **NumPy**: Suporte para operações matemáticas e cálculos vetoriais.
+* **Jupyter/Python Notebook**: Ambiente de desenvolvimento e exibição de tabelas.
+
+---
+
+## Instruções de Execução
+1. **Pré-requisitos**: Certifique-se de ter o Python instalado e uma interface que suporte arquivos.ipynb, recomenda-se o VS Code com a extensão "Jupyter" ou o Jupyter Lab. Você pode verificar a versão do seu Python digitando o seguinte comando no terminal:
+```bash
+python --version
+```
+2. **Clonagem ou Download**: Faça o download dos arquivos do projeto ou clone o repositório em uma pasta de sua preferência.
+3. **Instalação de Dependências**: O projeto utiliza as bibliotecas Pandas e NumPy para o processamento de dados e cálculos vetoriais. Para instalá-las, abra o terminal (ou CMD) dentro da pasta do projeto e execute:
+```bash
+pip install pandas numpy ipykernel
+```
+Nota: O ipykernel é necessário para que o VS Code consiga conectar o Python ao Notebook.
+4. **Abertura do projeto**: Abra a pasta do projeto no VS Code, clique no arquivo Aurora_Siger.ipynb e, no canto superior direito, clique em "Select Kernel" e escolha a sua instalação do Python.
+5. **Execução do Script**: Com as dependências instaladas, clique no botão "Run All" (Executar Tudo) no topo do arquivo.
+6.  **Resultados e saídas**: 
+* As tabelas (amostra do dataset) e o relatório de telemetria aparecerão logo abaixo das células de código.
+* Após a execução da última célula, o arquivo telemetria_aurora.csv será gerado/atualizado automaticamente na mesma pasta do projeto.
+
 ##  Exemplo de Relatório de Saída
-```text
-=======================================================
-        SISTEMA DE MONITORAMENTO PRÉ-DECOLAGEM         
-=======================================================
-Temp Int       :    23.50 °C    -> [OK]
-Energia        :    92.00 %     -> [OK]
-Pressao        :   250.00 bar   -> [OK]
--------------------------------------------------------
-Energia Bruta  :    46.00 kWh
-Autonomia Final:    28.70 kWh
--------------------------------------------------------
-Taxa de Sucesso da Missão: 84%
-STATUS FINAL: [SISTEMAS NOMINAIS - PRONTO PARA DECOLAR]
-=======================================================
+
+![Relatório de Telemetria](print_execucao_aurora.png)
